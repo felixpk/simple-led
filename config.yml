@@ -1,0 +1,15 @@
+gpio:
+    host: raspberrypi-zero
+    port: 8888
+
+led_strip:
+    spi_channel: 0
+    spi_frequency: 1000000
+    total_led_count: 90
+    usable_led_count: 90
+
+animations:
+    color_wheel:
+        loop_mode: ENDLESS
+        duration: 1.0
+        scale_factor: 1.0
