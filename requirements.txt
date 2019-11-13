@@ -1,5 +1,4 @@
 flask
 colour
 pigpio
-colors
 PyYAML
