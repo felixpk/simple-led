@@ -87,4 +87,4 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, handle_signal)
     signal.signal(signal.SIGTERM, handle_signal)
 
-    APP.run(debug=True)
+    APP.run(host='0.0.0.0')

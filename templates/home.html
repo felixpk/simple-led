@@ -2,28 +2,46 @@
 
 {% block content %}
     <div class="row mb-5">
-        <div class="col col-md-12 d-flex justify-content-center justify-content-md-start">
+        <div class="col col-md-12 d-flex justify-content-center justify-content-lg-start">
             <div id="color-picker-container"></div>
         </div>
     </div>
 
-    <h1>Animations</h1>
-    <form id="animationForm">
-        {{ form.csrf_token }}
-        <div class="form-group row">
-            <div class="col-sm-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Animations</h4>
+            <form id="animationForm">
+                {{ form.csrf_token }}
                 {{ form.animation(class="form-control mt-3") }}
-            </div>
-            <div class="col-sm">
-                <input type="submit" value="Play Animation"
-                       class="btn btn-primary mt-3">
-            </div>
+                <input type="submit" value="Play Animation" class="btn btn-primary mt-3">
+            </form>
         </div>
-    </form>
-
-    <div class="row">
-        <button id="disable" type="button" class="btn btn-danger">Disable</button>
     </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4 class="card-title">General</h4>
+            <button id="disable" type="button" class="btn btn-danger">Disable</button>
+        </div>
+    </div>
+
+{#    <h1>Animations</h1>#}
+{#    <form id="animationForm">#}
+{#        {{ form.csrf_token }}#}
+{#        <div class="form-group">#}
+{#            <div class="col-sm-6">#}
+{#                {{ form.animation(class="form-control mt-3") }}#}
+{#            </div>#}
+{#            <div class="col-sm">#}
+{#                <input type="submit" value="Play Animation"#}
+{#                       class="btn btn-primary mt-3">#}
+{#            </div>#}
+{#        </div>#}
+{#    </form>#}
+
+{#    <div class="row">#}
+
+{#    </div>#}
 
 {% endblock %}
 
