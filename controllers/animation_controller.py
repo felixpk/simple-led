@@ -19,7 +19,6 @@ class AnimationController:
             self.stop_current_animation()
             self.current_animation = ANIMATIONS[animation_name](
                 self.led_controller, anim_cfg)
-
             self.current_animation.start()
         except KeyError:
             raise AnimationNotFoundException(f"'{animation_name}' was not found")

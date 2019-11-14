@@ -5,11 +5,14 @@ gpio:
 led_strip:
     spi_channel: 0
     spi_frequency: 1000000
-    total_led_count: 90
+    total_led_count: 160
     usable_led_count: 90
 
 animations:
     color_wheel:
         loop_mode: ENDLESS
-        duration: 1.0
+        duration: 10.0
         scale_factor: 1.0
+
+    fade:
+        duration: 1.0
