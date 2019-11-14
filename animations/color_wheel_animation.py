@@ -6,8 +6,11 @@ from controllers.led_controller import LedController
 
 
 class ColorWheelAnimation(Animation):
+
+    name = "Color Wheel"
+
     def __init__(self, led_controller: LedController, config: Config):
-        super().__init__(led_controller)
+        super().__init__(led_controller, config)
         self.loop_mode = LoopMode[config.get('loop_mode', 'ENDLESS')]
         self.scale_factor = config.get('scale_factor', 1.0)
         self.duration = config.get('duration', 20.0)

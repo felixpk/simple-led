@@ -1,3 +1,4 @@
+import random
 from colorsys import rgb_to_hsv, hsv_to_rgb
 
 
@@ -26,7 +27,8 @@ class RGB255:
         self.b: int = int(b)
 
     def rgb(self) -> 'RGB':
-        return RGB(float(self.r) / 255, float(self.g) / 255, float(self.b) / 255)
+        return RGB(float(self.r) / 255, float(self.g) / 255,
+                   float(self.b) / 255)
 
     def __repr__(self):
         return f"rgb({self.r}, {self.g}, {self.b})"
@@ -47,3 +49,14 @@ class RGB:
 
     def __repr__(self):
         return f"rgb({self.r}, {self.g}, {self.b})"
+
+
+def random_rgb_255() -> RGB255:
+    rand = hsv_to_rgb(random.random(), 1, 1)
+    return RGB(rand[0], rand[1], rand[2]).rgb_255()
+
+
+def random_rgb() -> RGB:
+    return RGB(random.uniform(0.0, 1.0),
+               random.randint(0.0, 1.0),
+               random.randint(0.0, 1.0))

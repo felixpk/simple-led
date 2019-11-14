@@ -2,7 +2,7 @@ from typing import List
 
 import numpy as np
 
-from colors.color import RGB
+from colors.color import RGB, RGB255
 
 
 def lerp(t: float, i_min: float, i_max: float, o_min: float, o_max: float):
@@ -17,7 +17,17 @@ def color_gradient(col_a: RGB, col_b: RGB, steps: int) -> List[RGB]:
     return [lerp_color(x, col_a, col_b) for x in np.arange(0, 1, 1 / steps)]
 
 
+def color_gradient_255(col_a: RGB255, col_b: RGB255, steps: int) -> List[RGB255]:
+    return [lerp_color_255(x, col_a, col_b) for x in np.arange(0, 1, 1 / steps)]
+
+
 def lerp_color(t: float, color_a: RGB, color_b: RGB) -> RGB:
     return RGB(int(color_a.r + (color_b.r - color_a.r) * t),
                int(color_a.g + (color_b.g - color_a.g) * t),
                int(color_a.b + (color_b.b - color_a.b) * t))
+
+
+def lerp_color_255(t: float, color_a: RGB255, color_b: RGB255) -> RGB255:
+    return RGB255(int(color_a.r + (color_b.r - color_a.r) * t),
+                  int(color_a.g + (color_b.g - color_a.g) * t),
+                  int(color_a.b + (color_b.b - color_a.b) * t))

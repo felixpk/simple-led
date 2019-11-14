@@ -11,5 +11,5 @@ led_strip:
 animations:
     color_wheel:
         loop_mode: ENDLESS
-        duration: 1.0
+        duration: 10.0
         scale_factor: 1.0

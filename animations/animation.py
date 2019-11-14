@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from threading import Thread, Event
 
+from auxiliary.config import Config
 from controllers.led_controller import LedController
 
 
@@ -12,8 +13,9 @@ class LoopMode(Enum):
 
 
 class Animation(ABC, Thread):
+    name = 'None'
 
-    def __init__(self, led_controller: LedController):
+    def __init__(self, led_controller: LedController, config: Config):
         super().__init__()
         self._stop_event: Event = Event()
         self.led_controller: LedController = led_controller
