@@ -19,7 +19,7 @@ class Animation(ABC, Thread):
         super().__init__()
         self._stop_event: Event = Event()
         self.led_controller: LedController = led_controller
-        self.target_frame_rate: float = 30.0
+        self.target_frame_rate: float = 24.0
 
         # duration in seconds
         self.duration: float = 10.0

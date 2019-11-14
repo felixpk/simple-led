@@ -14,7 +14,7 @@ class ColorWheelAnimation(Animation):
         self.loop_mode = LoopMode[config.get('loop_mode', 'ENDLESS')]
         self.scale_factor = config.get('scale_factor', 1.0)
         self.duration = config.get('duration', 20.0)
-        self.target_frame_rate = config.get('target_frame_rate', 40.0)
+        self.target_frame_rate = config.get('target_frame_rate', 24.0)
 
     def on_start(self):
         pass
