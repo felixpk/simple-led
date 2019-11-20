@@ -1,5 +1,5 @@
 gpio:
-    host: raspberrypi-zero
+    host: localhost
     port: 8888
 
 led_strip:

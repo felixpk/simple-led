@@ -2,3 +2,4 @@ wtforms
 flask
 pigpio
 PyYAML
+numpy
