@@ -1,6 +1,6 @@
 from animations import helper
 from animations.animation import Animation, LoopMode
-from auxiliary.config import Config
+from helper.config import Config
 from colors import color
 from colors.color import RGB255
 from controllers.led_controller import LedController

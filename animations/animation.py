@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from threading import Thread, Event
 
-from auxiliary.config import Config
+from helper.config import Config
 from controllers.led_controller import LedController
 
 

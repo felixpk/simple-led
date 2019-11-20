@@ -4,7 +4,8 @@ from pathlib import Path
 import pigpio
 from flask import Flask, request, render_template
 
-from auxiliary.config import Config
+from animations import ANIMATIONS
+from helper.config import Config
 from colors.color import RGB255
 from controllers.animation_controller import (
     AnimationController,
@@ -20,7 +21,7 @@ APP = Flask(__name__,
 
 APP.config['SECRET_KEY'] = "ayx"
 
-CFG = Config.read(Path('config.yml'))
+CFG = Config.read(Path('config.yaml'))
 
 PIGPIO = pigpio.pi(CFG['gpio']['host'],
                    CFG['gpio']['port'])
@@ -70,8 +71,8 @@ def stop_anaimation():
 
 @APP.route('/')
 def home():
-    form = AnimationForm()
-    return render_template('home.html', form=form)
+    choices = [(a, ANIMATIONS[a].name) for a in ANIMATIONS]
+    return render_template('home.html', animations=choices)
 
 
 def handle_signal(signum, frame):

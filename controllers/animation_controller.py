@@ -2,7 +2,7 @@ from typing import Union
 
 from animations import ANIMATIONS
 from animations.animation import Animation
-from auxiliary.config import Config
+from helper.config import Config
 from controllers.led_controller import LedController
 
 
