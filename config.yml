@@ -13,6 +13,7 @@ animations:
         loop_mode: ENDLESS
         duration: 10.0
         scale_factor: 1.0
+        target_frame_rate: 24.0
 
     fade:
         duration: 1.0
