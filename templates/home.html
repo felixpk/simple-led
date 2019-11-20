@@ -13,7 +13,7 @@
             <form id="animationForm">
                 <select class="form-control" id="exampleFormControlSelect1">
                     {% for animation in animations %}
-                        <option value=animation[0]>animation[1]</option>
+                        <option value="{{ animation[0] }}">{{ animation[1] }}</option>
                     {% endfor %}
                 </select>
                 <input type="submit" value="Play Animation" class="btn btn-primary mt-3">
