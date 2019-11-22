@@ -1,6 +1,6 @@
 $('document').ready(function () {
     let colorPicker = new iro.ColorPicker('#color-picker-container');
-    colorPicker.on('color:change', onColorChange);
+    colorPicker.on('input:end', onColorChange);
 
     function onColorChange() {
         $.post("/api/color", colorPicker.color.rgb)

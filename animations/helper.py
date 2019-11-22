@@ -1,6 +1,6 @@
 from typing import List
 
-import numpy as np
+# import numpy as np
 
 from colors.color import RGB, RGB255
 
@@ -13,12 +13,12 @@ def lerp_01(t: float, out_min: float, out_max: float):
     return t * (out_max - out_min) / 1 + out_min
 
 
-def color_gradient(col_a: RGB, col_b: RGB, steps: int) -> List[RGB]:
-    return [lerp_color(x, col_a, col_b) for x in np.arange(0, 1, 1 / steps)]
-
-
-def color_gradient_255(col_a: RGB255, col_b: RGB255, steps: int) -> List[RGB255]:
-    return [lerp_color_255(x, col_a, col_b) for x in np.arange(0, 1, 1 / steps)]
+# def color_gradient(col_a: RGB, col_b: RGB, steps: int) -> List[RGB]:
+#     return [lerp_color(x, col_a, col_b) for x in np.arange(0, 1, 1 / steps)]
+#
+#
+# def color_gradient_255(col_a: RGB255, col_b: RGB255, steps: int) -> List[RGB255]:
+#     return [lerp_color_255(x, col_a, col_b) for x in np.arange(0, 1, 1 / steps)]
 
 
 def lerp_color(t: float, color_a: RGB, color_b: RGB) -> RGB:

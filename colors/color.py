@@ -57,6 +57,5 @@ def random_rgb_255() -> RGB255:
 
 
 def random_rgb() -> RGB:
-    return RGB(random.uniform(0.0, 1.0),
-               random.randint(0.0, 1.0),
-               random.randint(0.0, 1.0))
+    rand = hsv_to_rgb(random.random(), 1, 1)
+    return RGB(rand[0], rand[1], rand[2])

@@ -4,6 +4,9 @@ from helper.config import Config
 from colors import color
 from colors.color import RGB255
 from controllers.led_controller import LedController
+from helper.log_manager import LogManager
+
+LOGMAN = LogManager(__name__)
 
 
 class FadeAnimation(Animation):
@@ -20,10 +23,10 @@ class FadeAnimation(Animation):
         self.end_color: RGB255 = color.random_rgb_255()
 
     def on_start(self):
-        pass
+        LOGMAN.debug("Animation started")
 
     def on_stop(self):
-        pass
+        LOGMAN.debug("Animation stopped")
 
     def on_update(self):
         t = self.anim_progress

@@ -21,13 +21,13 @@ class Animation(ABC, Thread):
         self.led_controller: LedController = led_controller
         self.target_frame_rate: float = 24.0
 
-        # duration in seconds
+        # animation duration in seconds
         self.duration: float = 10.0
 
-        # percentage (0-1)
+        # animation progress in percent [0-1]
         self.anim_progress: float = 0.0
 
-        # repeat mode
+        # Looping mode of the animation
         self.loop_mode: LoopMode = LoopMode.SINGLE
 
         # how long this animation is running
@@ -70,7 +70,6 @@ class Animation(ABC, Thread):
     def stop(self):
         self._stop_event.set()
         self.join()
-        print("Thread stopped succesfully")
 
     @abstractmethod
     def on_start(self):

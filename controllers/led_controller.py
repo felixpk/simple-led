@@ -1,7 +1,8 @@
-from typing import Tuple, List
-from colors.color import RGB255
+from typing import List
 
 import pigpio
+
+from colors.color import RGB255
 
 
 class LedController:
@@ -23,7 +24,9 @@ class LedController:
         self.usable_led_count = usable_led_count
 
         self.colors = [0] * (total_led_count * 3)
-        self.spi_dev = self.gpio_controller.spi_open(spi_channel, spi_frequency, 0)
+        self.spi_dev = self.gpio_controller.spi_open(spi_channel,
+                                                     spi_frequency,
+                                                     0)
 
     def set_single_color(self, index: int, color: RGB255):
         self.colors[index * 3] = color.r
@@ -31,7 +34,9 @@ class LedController:
         self.colors[index * 3 + 1] = color.b
 
     def set_color(self, color: RGB255):
-        self.colors = list((int(color.r), int(color.b), int(color.g)) * self.usable_led_count) + \
+        self.colors = list((int(color.r),
+                            int(color.b),
+                            int(color.g)) * self.usable_led_count) +\
                       ([0] * 3 * (self.total_led_count - self.usable_led_count))
 
     def set_colors(self, colors: List[RGB255]):

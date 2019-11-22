@@ -5,21 +5,19 @@ import pigpio
 from flask import Flask, request, render_template
 
 from animations import ANIMATIONS
-from helper.config import Config
 from colors.color import RGB255
 from controllers.animation_controller import (
     AnimationController,
     AnimationNotFoundException
 )
 from controllers.led_controller import LedController
-from forms import AnimationForm
+from helper.config import Config
+from helper.log_manager import LogManager
 
 APP = Flask(__name__,
             static_url_path='/static',
             static_folder='static',
             template_folder='templates')
-
-APP.config['SECRET_KEY'] = "ayx"
 
 CFG = Config.read(Path('config.yaml'))
 
@@ -33,6 +31,11 @@ LED_CONTROLLER = LedController(PIGPIO,
                                CFG['led_strip']['usable_led_count'])
 
 ANIM_CONTROLLER = AnimationController(LED_CONTROLLER, Config(CFG['animations']))
+
+AVAILABLE_ANIMATIONS = [(a, ANIMATIONS[a].name) for a in ANIMATIONS]
+
+LOGMAN = LogManager('app')
+LOGMAN.debug('Server started')
 
 
 @APP.route('/api/color', methods=['POST'])
@@ -55,12 +58,11 @@ def disable():
 
 @APP.route('/api/animation/start', methods=['POST'])
 def start_animation():
-    if request.method == 'POST':
-        try:
-            ANIM_CONTROLLER.start_animation(request.form.get('animation'))
-            return {"status": "success"}
-        except AnimationNotFoundException as exc:
-            return {"status": "error", "message": str(exc)}
+    try:
+        ANIM_CONTROLLER.start_animation(request.form.get('animation'))
+        return {"status": "success"}
+    except AnimationNotFoundException as exc:
+        return {"status": "error", "message": str(exc)}
 
 
 @APP.route('/api/animation/stop', methods=['GET'])
@@ -71,8 +73,7 @@ def stop_anaimation():
 
 @APP.route('/')
 def home():
-    choices = [(a, ANIMATIONS[a].name) for a in ANIMATIONS]
-    return render_template('home.html', animations=choices)
+    return render_template('home.html', animations=AVAILABLE_ANIMATIONS)
 
 
 def handle_signal(signum, frame):
