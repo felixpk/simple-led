@@ -16,6 +16,9 @@ led_strip:
 
 # Settings that can be made for specific animations
 animations:
+    general:
+        target_frame_rate: 24
+
     color_wheel:
         loop_mode: ENDLESS
         duration: 10.0

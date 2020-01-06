@@ -15,11 +15,17 @@ class LoopMode(Enum):
 class Animation(ABC, Thread):
     name = 'None'
 
-    def __init__(self, led_controller: LedController, config: Config):
+    def __init__(self, led_controller: LedController):
         super().__init__()
+
+        # stops the animation thred if set
         self._stop_event: Event = Event()
+
+        # interface to communicate with rbp leds
         self.led_controller: LedController = led_controller
-        self.target_frame_rate: float = 24.0
+
+        # How many times the animation should update per second
+        self.target_frame_rate: float = 10.0
 
         # animation duration in seconds
         self.duration: float = 10.0
@@ -37,11 +43,11 @@ class Animation(ABC, Thread):
         self.on_start()
 
         current_lerp_time = 0
-        last_update = time.time_ns()
+        last_update = time.time()
 
         while not self._stop_event.is_set():
-            update_start = time.time_ns()
-            delta_time = (update_start - last_update) * 1e-9
+            update_start = time.time()
+            delta_time = update_start - last_update
             last_update = update_start
 
             current_lerp_time += delta_time
@@ -60,8 +66,7 @@ class Animation(ABC, Thread):
                 elif self.loop_mode == LoopMode.ENDLESS:
                     current_lerp_time = 0
 
-            sleep = (1.0 / self.target_frame_rate) - (
-                    (time.time_ns() - update_start) * 1e-9)
+            sleep = (1.0 / self.target_frame_rate) - (time.time() - update_start)
             if sleep > 0:
                 time.sleep(sleep)
 

@@ -13,20 +13,25 @@ class FadeAnimation(Animation):
 
     name = 'Fade'
 
-    def __init__(self, led_controller: LedController, config: Config):
-        super().__init__(led_controller, config)
-        self.loop_mode = LoopMode[config.get('loop_mode', 'ENDLESS')]
-        self.duration = config.get('duration', 5.0)
-        self.target_frame_rate = config.get('target_frame_rate', 40.0)
+    customizable_properties = {
+        "Duration": int,
+    }
+
+    def __init__(self, led_controller: LedController, **kwargs):
+        super().__init__(led_controller)
+
+        self.loop_mode = LoopMode[kwargs.get('loop_mode', 'ENDLESS')]
+        self.duration = kwargs.get('duration', 5.0)
+        self.target_frame_rate = kwargs.get('target_frame_rate', 10.0)
 
         self.start_color: RGB255 = color.random_rgb_255()
         self.end_color: RGB255 = color.random_rgb_255()
 
     def on_start(self):
-        LOGMAN.debug("Animation started")
+        pass
 
     def on_stop(self):
-        LOGMAN.debug("Animation stopped")
+        pass
 
     def on_update(self):
         t = self.anim_progress

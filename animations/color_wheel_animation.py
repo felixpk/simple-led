@@ -9,12 +9,13 @@ class ColorWheelAnimation(Animation):
 
     name = "Color Wheel"
 
-    def __init__(self, led_controller: LedController, config: Config):
-        super().__init__(led_controller, config)
-        self.loop_mode = LoopMode[config.get('loop_mode', 'ENDLESS')]
-        self.scale_factor = config.get('scale_factor', 1.0)
-        self.duration = config.get('duration', 20.0)
-        self.target_frame_rate = config.get('target_frame_rate', 24.0)
+    def __init__(self, led_controller: LedController, **kwargs):
+        super().__init__(led_controller)
+
+        self.loop_mode = LoopMode[kwargs.get('loop_mode', 'ENDLESS')]
+        self.scale_factor = kwargs.get('scale_factor', 1.0)
+        self.duration = kwargs.get('duration', 6.0)
+        self.target_frame_rate = kwargs.get('target_frame_rate', 10.0)
 
     def on_start(self):
         pass

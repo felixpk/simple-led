@@ -4,7 +4,7 @@ from pathlib import Path
 import pigpio
 from flask import Flask, request, render_template
 
-from animations import ANIMATIONS
+from animations import ANIMS
 from colors.color import RGB255
 from controllers.animation_controller import (
     AnimationController,
@@ -32,7 +32,12 @@ LED_CONTROLLER = LedController(PIGPIO,
 
 ANIM_CONTROLLER = AnimationController(LED_CONTROLLER, Config(CFG['animations']))
 
-AVAILABLE_ANIMATIONS = [(a, ANIMATIONS[a].name) for a in ANIMATIONS]
+AVAILABLE_ANIMATIONS = [(a, ANIMS[a].name) for a in ANIMS]
+
+ANIMATION_OPTIONS = {
+    "fade": [("duration", "float"), ("fps", "float")],
+    "color_wheel": [("duration", "float")]
+}
 
 LOGMAN = LogManager('app')
 LOGMAN.debug('Server started')
@@ -59,10 +64,18 @@ def disable():
 @APP.route('/api/animation/start', methods=['POST'])
 def start_animation():
     try:
-        ANIM_CONTROLLER.start_animation(request.form.get('animation'))
+        ANIM_CONTROLLER.start_animation(request.form.get('animation'), duration=10.0)
         return {"status": "success"}
     except AnimationNotFoundException as exc:
         return {"status": "error", "message": str(exc)}
+
+
+@APP.route("/api/animation/options/<string:name>", methods=['GET'])
+def animation_settings(name: str):
+    if name in ANIMATION_OPTIONS:
+        return {"options": ANIMATION_OPTIONS[name]}
+
+    return {"status": "error"}
 
 
 @APP.route('/api/animation/stop', methods=['GET'])

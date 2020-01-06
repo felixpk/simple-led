@@ -17,5 +17,13 @@ $('document').ready(function () {
 
 $('#animationForm').submit(function (e) {
     e.preventDefault();
-    $.post("/api/animation/start", {"animation": $("#animation").val()})
+    let animation_selection = $("#animation").val();
+    $.post("/api/animation/start", {"animation": animation_selection});
+});
+
+$('#animation').change(function (e) {
+    $.get("/api/animation/options/" + $(this).val())
+        .done(function (data) {
+            console.log(data['options'][0])
+        });
 });
