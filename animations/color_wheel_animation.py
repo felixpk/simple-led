@@ -1,12 +1,9 @@
 from animations.animation import Animation, LoopMode
 from colors.color import HSV
-from helper.config import Config
-
 from controllers.led_controller import LedController
 
 
 class ColorWheelAnimation(Animation):
-
     name = "Color Wheel"
 
     def __init__(self, led_controller: LedController, **kwargs):
@@ -28,6 +25,9 @@ class ColorWheelAnimation(Animation):
 
         for i in range(self.led_controller.usable_led_count):
             b = self.scale_factor / self.led_controller.usable_led_count
-            self.led_controller.set_single_color(i, HSV(t + (b * i), 1, 1).rgb_255())
+
+            self.led_controller.set_single_color(
+                i, HSV(t + (b * i), 1, 1).rgb_255()
+            )
 
         self.led_controller.show()

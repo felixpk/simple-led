@@ -64,7 +64,7 @@ def disable():
 @APP.route('/api/animation/start', methods=['POST'])
 def start_animation():
     try:
-        ANIM_CONTROLLER.start_animation(request.form.get('animation'), duration=10.0)
+        ANIM_CONTROLLER.start_animation(request.form.get('animation'), duration=2.0)
         return {"status": "success"}
     except AnimationNotFoundException as exc:
         return {"status": "error", "message": str(exc)}
